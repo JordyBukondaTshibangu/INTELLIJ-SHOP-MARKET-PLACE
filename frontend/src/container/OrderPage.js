@@ -17,7 +17,6 @@ const OrderPage = ({history,match}) => {
     const { order, loading, error } = orderDetails
 
     useEffect(() => {
-        console.log("this is from the use effct")
         dispatch(getOrderDetails(orderId))
     }, [dispatch, orderId])
 
@@ -53,13 +52,13 @@ const OrderPage = ({history,match}) => {
                                        order.orderItems.map((item, index) => (
                                            <ListGroup.Item key={index}>
                                                <Row>
-                                                   <Col md={1}>
-                                                       <Image src={item.image} alt={item.name} fluid rounded />
-                                                   </Col>
-                                                   <Col>
-                                                        <Link to={`product/${item.product}`}> {item.name}</Link>
-                                                   </Col>
-                                                   <Col md={4}>
+                                                    <Col md={1}>
+                                                        <Image src={item.image} alt={item.name} fluid rounded />
+                                                    </Col>
+                                                    <Col>
+                                                            <Link to={`product/${item.product}`}> {item.name}</Link>
+                                                    </Col>
+                                                    <Col md={4}>
                                                        { item.qty } x ${item.price} = ${ item.qty * item.price}
                                                     </Col>
                                                </Row>

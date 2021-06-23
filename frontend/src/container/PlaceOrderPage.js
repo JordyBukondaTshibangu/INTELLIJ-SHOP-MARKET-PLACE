@@ -14,16 +14,14 @@ const PlaceOrderPage = ({history}) => {
 
     const { order, success, error } = orderCreate
 
-    const addDeciaml = num => ( (Math.round(num * 100) / 100).toFixed(2))
+    const addDecimal = num => ( (Math.round(num * 100) / 100).toFixed(2))
     
-    cart.itemsPrice = addDeciaml(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
-    cart.shippingPrice = addDeciaml(cart.itemsPrice > 100 ? 0 : 100)
-    cart.taxPrice = addDeciaml(Number((0.15 * cart.itemsPrice).toFixed(2)))
+    cart.itemsPrice = addDecimal(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
+    cart.shippingPrice = addDecimal(cart.itemsPrice > 100 ? 0 : 100)
+    cart.taxPrice = addDecimal(Number((0.15 * cart.itemsPrice).toFixed(2)))
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.taxPrice) + Number(cart.shippingPrice)).toFixed(2)
 
-    const { cartItems, shippingAddress, itemsPrice, taxPrice, shippingPrice, totalPrice} = cart
-
-    console.log(cartItems, " order itemsv")
+    const { cartItems, shippingAddress, itemsPrice, taxPrice, shippingPrice, totalPrice } = cart
 
     useEffect(()=>{
         if(success){
@@ -53,7 +51,7 @@ const PlaceOrderPage = ({history}) => {
                         <ListGroup.Item>
                             <h2>Shiiping</h2>
                             <p>
-                                <strong>Address</strong>
+                                <strong>Address : </strong>
                                 { cart.shippingAddress.address}, { cart.shippingAddress.city},
                                 { cart.shippingAddress.postalCode}, { cart.shippingAddress.country}
                             </p>
