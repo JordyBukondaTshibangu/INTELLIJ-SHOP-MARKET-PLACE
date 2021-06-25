@@ -2,7 +2,7 @@
 import { ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_DETAILS_FAIL} from '../actionTypes/orderActionTypes';
 
 const initialStateOrder = {
-    loading : false,
+    loading : true,
     // orderItems : [],
     shippingAddress : {},
     order : {
