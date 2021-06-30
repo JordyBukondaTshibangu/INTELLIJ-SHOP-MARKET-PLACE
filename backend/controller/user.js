@@ -138,3 +138,26 @@ export const updateUserProfile = async (req, res) => {
         })
     }
 }
+
+
+/* ADMIN CONTROLLERS */
+
+export const getAllUsers = async (req, res) => {
+
+    try {
+        
+        const users = await User.find()
+
+        if(users.length < 1){
+            res.status(404).json({
+                mesage : "User not found"
+            })
+        }else {
+            res.status(200).json(users)
+        }
+    } catch (error) {
+        res.status(500).json({
+            message : 'An error occured'
+        })
+    }
+}

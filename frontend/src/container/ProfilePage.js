@@ -57,10 +57,10 @@ const ProfilePage = ({location, history}) => {
     }
 
     return (
-        <Row>
+        <Row className="mt-5">
             <Col md={4}>
             <FormContainer>
-           <h3>User Profile</h3>
+           <h3>My Profile</h3>
             { message &&  <Message variant="danger">{message}</Message>}
             { error &&  <Message variant="danger">{ error }</Message>}
             { success &&  <Message variant="success">Profil Update</Message>}
@@ -86,7 +86,7 @@ const ProfilePage = ({location, history}) => {
                 </Form>
             </FormContainer>
             </Col>
-            <Col md={8} className="mt-5">
+            <Col md={8}>
                 <h2>My Orders</h2>
                 { errorOrderList &&  <Message variant="danger">{errorOrderList}</Message> }
                 
