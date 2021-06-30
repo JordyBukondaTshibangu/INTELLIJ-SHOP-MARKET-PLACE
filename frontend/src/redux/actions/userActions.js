@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL, USER_LOGOUT } from '../actionTypes/userActionTypes';
+import { ORDERS_RESET } from '../actionTypes/orderActionTypes';
+import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL, USER_LOGOUT, USER_DETAILS_RESET } from '../actionTypes/userActionTypes';
 import { USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL } from '../actionTypes/userActionTypes';
 import { USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_DETAILS_FAIL } from '../actionTypes/userActionTypes';
 import { USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, USER_UPDATE_FAIL } from '../actionTypes/userActionTypes'
@@ -38,6 +39,8 @@ export const logoutUser = () => dispatch => {
 
     localStorage.removeItem('userInfo');
     dispatch({ type : USER_LOGOUT });
+    dispatch({ type : ORDERS_RESET });
+    dispatch({ type : USER_DETAILS_RESET });
 }
 export const registerUser = (name, email, password) => async(dispatch) => {
 

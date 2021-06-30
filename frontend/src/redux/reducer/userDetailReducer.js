@@ -1,4 +1,4 @@
-import { USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_DETAILS_FAIL } from '../actionTypes/userActionTypes'
+import { USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_DETAILS_FAIL, USER_DETAILS_RESET } from '../actionTypes/userActionTypes'
 
 const initialState = {
     loading : false,
@@ -25,6 +25,11 @@ const userDetailsReducer = (state = initialState, action) => {
                 ...state,
                 loading : false,
                 error : action.payload
+            }
+        case  USER_DETAILS_RESET :
+            return {
+                ...state,
+                user : {}
             }
         default:
             return state;
