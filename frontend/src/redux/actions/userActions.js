@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ORDERS_RESET } from '../actionTypes/orderActionTypes';
-import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL, USER_LOGOUT, USER_DETAILS_RESET, USERS_LIST_REQUEST, USERS_LIST_SUCCESS, USERS_LIST_FAIL, USERS_LIST_RESET } from '../actionTypes/userActionTypes';
+import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL, USER_LOGOUT, USER_DETAILS_RESET, USERS_LIST_REQUEST, USERS_LIST_SUCCESS, USERS_LIST_FAIL, USERS_LIST_RESET, USER_DELETE_REQUEST, USER_DELETE_SUCCESS, USER_DELETE_FAIL, USER_UPDATE_ADMIN_REQUEST, USER_UPDATE_ADMIN_SUCCESS, USER_UPDATE_ADMIN_FAIL } from '../actionTypes/userActionTypes';
 import { USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL } from '../actionTypes/userActionTypes';
 import { USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_DETAILS_FAIL } from '../actionTypes/userActionTypes';
 import { USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, USER_UPDATE_FAIL } from '../actionTypes/userActionTypes'
@@ -170,6 +170,67 @@ export const getUsersList = () => async(dispatch, getState ) => {
             console.log('THIS IS THE ERROR ', error)
             dispatch({
                 type : USERS_LIST_FAIL,
+                payload : error.response && error.response.data.message ? error.response.data.message : error.message
+            })
+        }
+}
+export const updateUserAdmin= (user, id) => async(dispatch, getState ) => {
+
+    try {
+            dispatch({ type : USER_UPDATE_ADMIN_REQUEST })
+
+            const { userLogin : { userInfo } } = getState()
+
+            const config = {
+                headers : {
+                    'Content-Type' : 'application/json',
+                    Authorization :  `Bearer ${userInfo.token}`
+                }
+            }
+    
+            const res = await axios.put(`http://localhost:5000/api/users/${id}`, user, config)
+    
+            const { data } = res
+    
+            dispatch({
+                type : USER_UPDATE_ADMIN_SUCCESS,
+                payload : data
+            })
+            
+        } catch (error) {
+            console.log('THIS IS THE ERROR ', error)
+            dispatch({
+                type : USER_UPDATE_ADMIN_FAIL,
+                payload : error.response && error.response.data.message ? error.response.data.message : error.message
+            })
+        }
+}
+export const deleteUser = id => async(dispatch, getState ) => {
+
+    try {
+            dispatch({ type : USER_DELETE_REQUEST })
+
+            const { userLogin : { userInfo } } = getState()
+
+            const config = {
+                headers : {
+                    Authorization :  `Bearer ${userInfo.token}`
+                }
+            }
+    
+            const res = await axios.delete(`http://localhost:5000/api/users/${id}`, config)
+    
+            const { data } = res
+    
+            dispatch({
+                type : USER_DELETE_SUCCESS,
+                payload : data
+            })
+            
+        } catch (error) {
+            console.log('THIS IS THE ERROR ', error)
+            dispatch({
+                type : USER_DELETE_FAIL,
                 payload : error.response && error.response.data.message ? error.response.data.message : error.message
             })
         }

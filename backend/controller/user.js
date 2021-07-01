@@ -139,7 +139,6 @@ export const updateUserProfile = async (req, res) => {
     }
 }
 
-
 /* ADMIN CONTROLLERS */
 
 export const getAllUsers = async (req, res) => {
@@ -161,3 +160,82 @@ export const getAllUsers = async (req, res) => {
         })
     }
 }
+export const getUserById = async (req, res) => {
+
+    try {
+        const userId = req.params.id
+        
+        const user = await User.findById({ _id : userId})
+
+        if(user){
+            res.status(200).json({user})
+        } else {
+            return res.status(404).json({
+                mesage : "User not found"
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            message : 'An error occured'
+        })
+    }
+}
+export const updateUserById = async (req, res) => {
+
+    try {
+        
+        const user = await User.findById(req.params.id)
+
+        if(!user){
+            return res.status(404).json({
+                mesage : "User not found"
+            })
+        }
+
+        user.name = req.body.name || user.name
+        user.email = req.body.email || user.email
+        
+        if(req.body.isAdmin){
+            user.isAdmin = req.body.isAdmin
+        }
+ 
+        const updatedUser = await user.save();
+
+        return res.status(200).json({
+            _id : updatedUser._id,
+            name : updatedUser.name,
+            email : updatedUser.email,
+            isAdmin : updatedUser.isAdmin,
+        })
+        
+    } catch (error) {
+        res.status(500).json({
+            message : error
+        })
+        throw new Error()
+    }
+}
+export const deleteUser = async (req, res) => {
+
+    try {
+        const userId = req.params.id
+        
+        const user = await User.findById({ _id : userId})
+
+        if(user){
+            await user.remove()
+            res.status(200).json({
+                message : "User deteled"
+            })
+        } else {
+            return res.status(404).json({
+                mesage : "User not found"
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            message : 'An error occured'
+        })
+    }
+}
+

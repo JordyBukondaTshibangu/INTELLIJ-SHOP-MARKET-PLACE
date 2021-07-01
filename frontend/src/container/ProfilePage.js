@@ -25,8 +25,6 @@ const ProfilePage = ({location, history}) => {
     const ordersMyList = useSelector(state => state.ordersMyList)
     const { error : errorOrderList , loading : loadingOrderList, orders } = ordersMyList
 
-    console.log(errorOrderList, loadingOrderList, orders)
-
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
