@@ -3,12 +3,14 @@ import  'colors'
 import  bodyParser from 'body-parser';
 import  cors from 'cors';
 import dotenv from 'dotenv'
+import path from 'path'
 import connectionToDB from './config/database.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 import productRoute from './routes/products.js'
 import userRoute from './routes/user.js'
 import orderRoute from './routes/orders.js'
+import uploadRoute from './routes/uploadRoute.js'
 
 const app = express();
 dotenv.config();
@@ -25,6 +27,10 @@ app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_I
 app.use('/api/products', productRoute);
 app.use('/api/users', userRoute);
 app.use('/api/orders', orderRoute);
+app.use('/api/upload', uploadRoute)
+
+const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 app.use(notFound)
 app.use(errorHandler);
