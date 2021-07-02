@@ -14,11 +14,15 @@ import usersListReducer from './adminUserListReducer';
 import userDeleteReducer from './adminUserDeleteReducer';
 import userUpdateAdminReducer from './adminUserUpdateReducer';
 import productDeleteReducer from './productDeleteReducer';
+import productCreateReducer from './productCreateReducer'
+import productUpdateReducer from './productUpdateReducer';
 
 const rootReducer = combineReducers({
     productList : productsListReducer,
     productDetail : productDetailReducer,
     productDelete : productDeleteReducer,
+    productCreate : productCreateReducer,
+    productUpdate : productUpdateReducer,
     cart : cartReducer,
     userLogin : userLoginReducer,
     userRegister : userRegisterReducer,

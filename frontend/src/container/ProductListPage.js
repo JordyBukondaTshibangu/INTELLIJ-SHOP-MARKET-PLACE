@@ -4,7 +4,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Col, Row } from 'react-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader'
-import { deleteProduct, fetchProducts } from '../redux/actions/productActions';
+import { createProduct, deleteProduct, fetchProducts } from '../redux/actions/productActions';
+import { PRODUCT_CREATE_RESET } from '../redux/actionTypes/productActionTypes';
 
 
 const ProductListPage = ({ history }) => {
@@ -17,16 +18,30 @@ const ProductListPage = ({ history }) => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    const productCreate = useSelector(state => state.productCreate)
+    const { loading : createLoading, error : createError, product, success : createSuccess } = productCreate
+
     const productDelete = useSelector(state => state.productDelete)
     const { loading : deleteLoading, error : errorDelete, success } = productDelete
 
     useEffect(() => {
+        dispatch({ type : PRODUCT_CREATE_RESET})
         if(userInfo && userInfo.isAdmin){
             dispatch(fetchProducts())
         } else {
             history.push('/login')
         }
-    },[dispatch, history, userInfo, success])
+
+        if(createSuccess){
+            history.push(`/admin/product/${product._id}/edit`)
+        } else {
+            dispatch(fetchProducts())
+        }
+    },[dispatch, history, userInfo, success, product, createSuccess])
+
+    const handleCreateProduct = () => {
+        dispatch(createProduct())
+    }
 
     const deleteHandler = id => {
         if(window.confirm('Are you sure ? ')){
@@ -41,12 +56,14 @@ const ProductListPage = ({ history }) => {
                     <h1>Products</h1>
                 </Col>
                 <Col className="text-right">
-                    <Button className="my-3">
+                    <Button className="my-3" onClick={handleCreateProduct}>
                         <i className="fas fa-plus"></i>
                          Create Product
                     </Button>
                 </Col>
             </Row>
+            { createLoading && <Loader />}
+            { createError && <Message variant="danger">{error}</Message>}
             { deleteLoading && <Loader />}
             { errorDelete && <Message variant="danger">{error}</Message>}
             

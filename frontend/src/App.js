@@ -16,6 +16,7 @@ import OrderPage from './container/OrderPage'
 import UserListPage from './container/UserListPage'
 import UserEditPage from './container/UserEditPage'
 import ProductListPage from './container/ProductListPage'
+import ProductEditPage from './container/ProductEditPage'
 
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
 					<Route path="/cart/:id" component={CartPage} />
 
 					<Route path="/admin/product-list" exact component={ProductListPage} />
+					<Route path="/admin/product/:id/edit" exact component={ProductEditPage} />
 					<Route path="/admin/user-list" exact component={UserListPage} />
 					<Route path="/admin/user/:id/edit" exact component={UserEditPage} />
 				</Container>
