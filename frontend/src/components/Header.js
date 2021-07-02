@@ -45,10 +45,10 @@ const Header = () => {
                         <LinkContainer to='/admin/user-list'>
                             <NavDropdown.Item>User List</NavDropdown.Item>
                         </LinkContainer>
-                        <LinkContainer to='/admin/products-list'>
+                        <LinkContainer to='/admin/product-list'>
                             <NavDropdown.Item>Product List</NavDropdown.Item>
                         </LinkContainer>
-                        <LinkContainer to='/admin/orders-list'>
+                        <LinkContainer to='/admin/order-list'>
                             <NavDropdown.Item>Order List</NavDropdown.Item>
                         </LinkContainer>
                     </NavDropdown>

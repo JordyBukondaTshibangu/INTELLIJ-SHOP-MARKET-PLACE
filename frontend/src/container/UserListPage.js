@@ -7,7 +7,7 @@ import Loader from '../components/Loader'
 import { getUsersList , deleteUser} from '../redux/actions/userActions';
 
 
-const RegisterPage = ({ history }) => {
+const UserListPage = ({ history }) => {
 
     const dispatch = useDispatch()
 
@@ -89,4 +89,4 @@ const RegisterPage = ({ history }) => {
     )
 }
 
-export default RegisterPage
+export default UserListPage
