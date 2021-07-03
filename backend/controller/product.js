@@ -8,7 +8,7 @@ export const getProducts = async (req,res) => {
 
     } catch (error) {
         res.status(500).json({
-            message : "Oupsss......An Error occured ",
+            message : "Oupsss... An Error occured ",
             error : error.message
         });
     }
@@ -107,6 +107,50 @@ export const deleteProduct =  async (req,res) => {
         }
         else {
             res.status(404).json({ message : "No Product found "})
+        }
+        
+    } catch (error) {
+        res.status(500).json({
+            message : "Oupsss......An Error occured ",
+            error : error.message
+        });
+    }
+}
+export const createProductReview =  async (req,res) => {
+    try {
+        const { rating, comments } = req.body
+
+        const product = await Product.findById(req.params.id)
+
+        if(product){
+            const productAlreadyReviewd = product.reviews.find(review => review.user.toString() === req.user._id.toString())
+            
+            if(productAlreadyReviewd){
+                res.status(400)
+                throw new Error('Product Already Reviewed')
+            }
+
+            const review = {
+                name : req.user.name ,
+                rating : Number(rating),
+                comments,
+                user : req.user._id
+            }
+
+            product.reviews.push(review)
+
+            product.numReviews = product.reviews.length
+
+            product.rating = product.reviews.reduce((acc, item )=> item.rating + acc, 0 ) / product.reviews.length
+
+            await product.save()
+
+            res.status(200).json({ message : 'Review added'})
+        } else {
+            res.status(404).json({
+                message : 'Product not found'
+            })
+            throw new Error('Product Not Found')
         }
         
     } catch (error) {

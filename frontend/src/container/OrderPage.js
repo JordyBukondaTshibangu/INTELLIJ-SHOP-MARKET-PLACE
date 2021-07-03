@@ -65,7 +65,7 @@ const OrderPage = ({match,history}) => {
                 setSdkReady(true)
             }
         }
-    }, [dispatch, orderId, order, successPay, successDeliver])
+    }, [dispatch, orderId, order, successPay, successDeliver, history, userInfo])
 
     const successPaymentHandler = (paymentResult) => {
         dispatch(payOrder(orderId, paymentResult))

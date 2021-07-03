@@ -18,6 +18,7 @@ import productCreateReducer from './productCreateReducer'
 import productUpdateReducer from './productUpdateReducer';
 import orderListReducer from './orderListReducer';
 import orderDeliverReducer from './orderDeliverReducer';
+import reviewCreateReducer from './reviewCreateReducer';
 
 const rootReducer = combineReducers({
     productList : productsListReducer,
@@ -30,15 +31,16 @@ const rootReducer = combineReducers({
     userRegister : userRegisterReducer,
     userDetails : userDetailsReducer,
     userUpdate : userUpdateReducer,
+    usersList : usersListReducer ,
+    userDelete : userDeleteReducer,
+    userUpdateAdmin : userUpdateAdminReducer,
     orderCreate : orderCreateReducer,
     orderDetails : orderDetailsReducer,
     orderPay : orderPayReducer,
     orderDeliver : orderDeliverReducer,
     ordersMyList : ordersReducer,
     orderList : orderListReducer,
-    usersList : usersListReducer ,
-    userDelete : userDeleteReducer,
-    userUpdateAdmin : userUpdateAdminReducer
+    reviewCreate : reviewCreateReducer
 });
 
 export default rootReducer;

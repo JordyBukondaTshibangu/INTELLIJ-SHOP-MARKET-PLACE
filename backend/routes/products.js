@@ -1,11 +1,12 @@
 import express from 'express';
-import { getProducts, getProductById, deleteProduct, createProduct, updateProduct } from '../controller/product.js'
+import { getProducts, getProductById, deleteProduct, createProduct, updateProduct, createProductReview } from '../controller/product.js'
 import { validateToken, admin } from '../middleware/auth_middleware.js'
 
 const router = express.Router();
 
 router.get('/', getProducts)
 router.get('/:id', getProductById)
+router.post('/:id/reviews', validateToken, createProductReview)
 
 // Admin routes 
 router.post('/', validateToken, admin, createProduct)

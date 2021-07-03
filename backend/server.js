@@ -20,9 +20,9 @@ connectionToDB();
 
 const port = process.env.PORT || 5000;
 
-if(process.env.NODE_ENV === 'development'){
-    app.use(morgan('dev'))
-}
+// if(process.env.NODE_ENV === 'development'){
+//     app.use(morgan('dev'))
+// }
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
