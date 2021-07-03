@@ -6,7 +6,9 @@ import { fetchProducts } from '../redux/actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
-const HomePage = () => {
+const HomePage = ({match}) => {
+
+    const keyword = match.params.keyword
 
     const dispatch = useDispatch();
 
@@ -16,9 +18,9 @@ const HomePage = () => {
     
     useEffect(() => {
         
-        dispatch(fetchProducts());
+        dispatch(fetchProducts(keyword));
         
-    }, [dispatch])
+    }, [dispatch, keyword])
 
     return (
         <>
