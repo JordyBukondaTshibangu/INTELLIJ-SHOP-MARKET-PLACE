@@ -171,3 +171,16 @@ export const createProductReview =  async (req,res) => {
         });
     }
 }
+export const getToProducts = async (req,res) => {
+    try {
+        const products = await Product.find({}).sort({ rating : -1 }).limit(5)
+
+        res.status(200).json(products);
+
+    } catch (error) {
+        res.status(500).json({
+            message : "Oupsss... An Error occured ",
+            error : error.message
+        });
+    }
+}

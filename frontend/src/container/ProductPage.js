@@ -7,6 +7,7 @@ import { fetchProduct, createProductReview } from '../redux/actions/productActio
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { REVIEW_CREATE_RESET } from '../redux/actionTypes/productActionTypes'
+import Meta from '../components/Meta'
 
 
 const ProductPage = props => {
@@ -58,6 +59,7 @@ const ProductPage = props => {
                 loading ? <Loader/> : 
                 error ? <Message variant="danger" children={error} /> : 
                 <>
+                    <Meta description={description} title={name} keyword={name} />
                     <Link to="/" className="btn btn-dark my-3">Back</Link>
                     <Row>
                         <Col md={6}>
