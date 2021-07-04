@@ -28,6 +28,8 @@ const App = () => {
 				<Container>
 					<Route path="/" exact component={HomePage} />
 					<Route path="/search/:keyword" exact component={HomePage} />
+					<Route path="/page/:pageNumber" exact component={HomePage} />
+					<Route path="/search/:keyword/page/:pageNumber" exact component={HomePage} />
 					<Route path="/login" exact component={LoginPage} />
 					<Route path="/register" exact component={RegisterPage} />
 					<Route path="/profile" exact component={ProfilePage} />
@@ -39,6 +41,7 @@ const App = () => {
 					<Route path="/cart/:id" component={CartPage} />
 
 					<Route path="/admin/product-list" exact component={ProductListPage} />
+					<Route path="/admin/product-list/:pageNumber" exact component={ProductListPage} />
 					<Route path="/admin/product/:id/edit" exact component={ProductEditPage} />
 					<Route path="/admin/user-list" exact component={UserListPage} />
 					<Route path="/admin/user/:id/edit" exact component={UserEditPage} />

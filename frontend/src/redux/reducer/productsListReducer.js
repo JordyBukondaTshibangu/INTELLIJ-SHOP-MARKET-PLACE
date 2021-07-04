@@ -17,7 +17,10 @@ const productsListReducer = (state = initialStateProducts, action) => {
             return { 
                 ...state,
                 loading : false, 
-                products : action.payload 
+                products : action.payload.products,
+                page : action.payload.page,
+                pages : action.payload.pages,
+
             };
         case PRODUCT_LIST_FAIL:
             return {

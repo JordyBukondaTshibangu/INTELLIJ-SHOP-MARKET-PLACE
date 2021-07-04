@@ -2,6 +2,9 @@ import Product from '../models/product.js'
 
 export const getProducts = async (req,res) => {
     try {
+        const pageSize = 4
+        const page = Number(req.params.pageNumber) || 1
+
         const keyword = req.query.keyword ? {
             name : {
                 $regex : req.query.keyword,
@@ -9,8 +12,10 @@ export const getProducts = async (req,res) => {
             }
         } : {}
 
-        const products = await Product.find({...keyword});
-        res.status(200).json(products);
+        const count = await Product.countDocuments({...keyword})
+        const products = await Product.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1))
+
+        res.status(200).json({ products, page, pages : Math.ceil(count / pageSize)});
 
     } catch (error) {
         res.status(500).json({
