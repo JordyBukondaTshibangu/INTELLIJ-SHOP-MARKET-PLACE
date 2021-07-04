@@ -29,11 +29,7 @@ const userUpdateReducer = (state = initialState, action) => {
                 error : action.payload
             }
         case  USER_UPDATE_RESET :
-            return {
-                ...state,
-                loading : false,
-                error : action.payload
-            }
+            return { }
         default:
             return state;
     }

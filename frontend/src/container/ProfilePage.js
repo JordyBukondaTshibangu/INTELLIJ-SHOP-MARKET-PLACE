@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import { getUserDetail, updateUserProfil } from '../redux/actions/userActions';
 import FormContainer from '../components/Form';
 import { getMyOrders } from '../redux/actions/orderActions';
+import { USER_UPDATE_RESET } from '../redux/actionTypes/userActionTypes';
 
 
 const ProfilePage = ({location, history}) => {
@@ -35,7 +36,8 @@ const ProfilePage = ({location, history}) => {
         if(!userInfo){
             history.push('/login');
         }else{
-            if(!user.name){
+            if(!user.name || success){
+                dispatch({type : USER_UPDATE_RESET})
                 dispatch(getUserDetail('profile'))
                 dispatch(getMyOrders())
             }else{
@@ -43,7 +45,7 @@ const ProfilePage = ({location, history}) => {
                 setEmail(user.email)
             }
         }
-    }, [history, userInfo, dispatch, user ])
+    }, [history, userInfo, dispatch, user, success ])
 
     const submitHandler = event => {
         event.preventDefault();
