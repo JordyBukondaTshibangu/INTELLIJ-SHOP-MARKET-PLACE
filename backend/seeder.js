@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import 'colors'
 import connectionToDB from './config/database.js';
 import User from './models/user.js'
 import Product from './models/product.js'
@@ -29,10 +28,10 @@ const importData = async() => {
             }
         })
         await Product.insertMany(sampleProducts);
-        console.log('Data imported ' .green.inverse);
+        console.log('Data imported ');
         process.exit()
     } catch (error) {
-        console.log(error.message .red.inverse);
+        console.log(error.message);
         process.exit(1)
     }
 }
@@ -45,10 +44,10 @@ const destroytData = async() => {
         await Product.deleteMany();
         await Order.deleteMany();
     
-        console.log('Data destroyed ' .green.inverse);
+        console.log('Data destroyed ');
         process.exit()
     } catch (error) {
-        console.log(error.message .red.inverse);
+        console.log(error.message);
         process.exit(1)
     }
 } 

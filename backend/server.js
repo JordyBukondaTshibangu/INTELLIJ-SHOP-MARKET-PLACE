@@ -49,5 +49,5 @@ app.use(notFound)
 app.use(errorHandler);
 
 app.listen(port, () => {
-    console.log(`The server is up running in ${process.env.NODE_ENV} on port ${port}`.bgBlue.bold)
+    console.log(`The server is up running in ${process.env.NODE_ENV} on port ${port}`)
 });
