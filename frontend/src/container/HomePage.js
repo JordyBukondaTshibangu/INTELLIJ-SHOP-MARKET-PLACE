@@ -36,7 +36,7 @@ const HomePage = ({match}) => {
             {
                 !keyword ? <ProductCarousel /> : <Link to='/' className='btn btn-light'>Go Back</Link>
             }
-            <h2>Latest products</h2>
+            <h2 className='mt-5'>Latest products</h2>
             {
                 loading ? 
                     <Loader/> : error ? 
